@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 it('displays the portfolio page', function () {
     $response = $this->get('/');
 
