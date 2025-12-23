@@ -3,6 +3,27 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+            {{-- SEO Meta Tags --}}
+            <meta name="description" content="Evan Robertson Dot Dev - Personal Portfolio">
+            <meta name="keywords" content="Developer,Programming,Freelance">
+            <meta name="author" content="Evan Robertson">
+            <meta name="robots" content="index, follow">
+            <meta name="googlebot" content="index, follow">
+
+            {{-- Open Graph Meta Tags --}}
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="Evan Robertson Portfolio">
+            <meta property="og:description" content="Evan Robertson Dot Dev - Personal Portfolio">
+            <meta property="og:url" content="{{ url()->current() }}">
+            <meta property="og:site_name" content="Evan Robertson Portfolio">
+            <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+            {{-- Twitter Card Meta Tags --}}
+            <meta name="twitter:title" content="Evan Robertson Portfolio">
+            <meta name="twitter:description" content="Evan Robertson Dot Dev - Personal Portfolio">
+
+            {{-- Additional SEO Meta Tags --}}
+            <link rel="canonical" href="{{ $canonicalUrl ?? url()->current() }}">
 
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
