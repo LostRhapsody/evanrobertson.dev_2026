@@ -7,7 +7,5 @@
         "cursor",
         "opencode"
     ],
-    "guidelines": [
-        "laravel/fortify"
-    ]
+    "guidelines": []
 }
