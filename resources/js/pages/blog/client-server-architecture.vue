@@ -1,66 +1,204 @@
 <script setup lang="ts">
-   import Image from "@/components/Image.vue";
-   import Post from "./Post.vue"
-   import blogPosts from "./post-list";
-   import Heading from "@/components/Heading.vue";
-   const tableOfContents = [
-      "Skeleton",
-      "Definitions",
-      "Clients",
-      "Servers",
-   ]
+import Heading from '@/components/Heading.vue';
+import Image from '@/components/Image.vue';
+import Post from './Post.vue';
+import blogPosts from './post-list';
+const tableOfContents = ['Skeleton', 'Definitions', 'Clients', 'Servers'];
+
+// TODO - send an HTTP request to the server
+function callServer() {
+    const response_element = document.getElementById('response');
+    if (response_element) response_element.innerHTML = 'Hi from the server!';
+}
 </script>
 <template>
-   <Post :title=blogPosts[0].title :date=blogPosts[0].date :outline=tableOfContents>
-      <Heading title="WIP Notice" />
-      <p>This is a work in process, but I haven't disabled the auto-deploy system for this website yet, so as soon as I
-         save my changes to github, this will be LIVE. Which is fine and not a big deal. Just letting you know, this
-         blog post is about 10% done.</p>
-      <Heading title="End of WIP Notice" />
-      <p>The amount of technical jargon we are bombarded with daily is overwhelming, especially when you're first
-         learning. Being a studen in College learning about programming and networking, lots of simple concepts went
-         over my head, just due to how convuluted it sounded, while in practice being not that complex at all!</p>
-      <p>One of those concepts was client-server architecutre. What does it mean, what does it apply to?</p>
-      <p>If you're coming from a technical background, you probably have the correct assumption a browser is the client
-         and whatever computer that hosts the website is a server. That would be correct! But it applies to more than
-         just that.</p>
-      <p>If you're just starting your journey, and you didn't know a browser acts as a client, or what 'hosting' a
-         website even means, that's okay! We'll talk about all that and more.</p>
-      <Heading title="What is a Simple Man's Summary?" />
-      <p>
-         "A Simple Man's Summary" is my version of "A dummy's guide to:", and they are often summaries I write for
-         myself. When someone approaches me with a complex topic I don't understand, I sit down with them and draft A
-         Simple Man's Summary. <strong>Because I am, quite honestly, a simple man,</strong> and complex things
-         don't sit well with me.
-      </p>
-      <a target="_" href="https://grugbrain.dev/">
-         <Image src="https://grugbrain.dev/grug.png" alt="The grug brained developer meme/logo/image" align="center"
-            width="300px" />
-      </a>
-      <Heading title="Skeleton" />
-      <p>
-         This is a skeleton section to plan out how I want to write this blog post.
-      </p>
-      <ol>
-         <li>1. I'd like it to start with the fact that the communication between <em>things</em> can be quite
-            confusing.
-         </li>
-         <li>2. Then, move onto what a client is, and give examples.</li>
-         <li>3. Same for server.</li>
-         <li>4. Provide some examples of some client server communication scenarios</li>
-         <li>5. How does it apply?</li>
-      </ol>
-      <Heading title="Definitions" />
-      <p>
-         So what are we talking about?
-      </p>
-      <Heading title="Clients" />
-      <p>
-         So what are we talking about?
-      </p>
-      <Heading title="Servers" />
-      <p>
-         So what are we talking about?
-      </p>
-   </Post>
+    <Post
+        :title="blogPosts[0].title"
+        :date="blogPosts[0].date"
+        :outline="tableOfContents"
+    >
+        <p>
+            The amount of technical jargon we are bombarded with daily is
+            overwhelming, especially when you're first starting out. When I was
+            a student in College learning about programming and networking, lots
+            of simple concepts went over my head, just due to how convuluted it
+            sounded, while in practice being not that complex at all!
+        </p>
+        <p>
+            One of those concepts was client-server architecutre. What does it
+            mean, what does it apply to?
+        </p>
+        <p>
+            If you're coming from a technical background, you probably have the
+            correct assumption a browser is the client and whatever computer
+            that hosts the website is a server. That would be correct! But it
+            applies to more than just websites.
+        </p>
+        <p>
+            If you're just starting your journey, and you didn't know a browser
+            acts as a client, or what 'hosting' a website even means, that's
+            okay! We'll talk about all that and more.
+        </p>
+        <Heading title="What is a Simple Man's Summary?" />
+        <p>
+            "A Simple Man's Summary" is my version of "A dummy's guide to", and
+            they are often summaries I write for myself. When someone approaches
+            me with a complex topic I don't understand, I sit down with them and
+            draft A Simple Man's Summary.
+            <strong>Because I am, quite honestly, a simple man,</strong> and
+            complex things don't sit well with me.
+        </p>
+        <a target="_" href="https://grugbrain.dev/">
+            <Image
+                src="https://grugbrain.dev/grug.png"
+                alt="The grug brained developer meme/logo/image"
+                align="center"
+                width="300px"
+            />
+        </a>
+        <Heading title="So What is Client-Server Architecture?" />
+        <p>Let's start with some definitions!</p>
+        <Heading title="Architecture" />
+        <p>
+            When we talk about architecture, we aren't talking about buildings!
+            In this context, architecture simply refers to how we are designing
+            a system. Imagine your favorite website, like YouTube.
+        </p>
+        <p>
+            When you visit YouTube in your browser, you see lots of content that
+            lives in your browser, buttons, thumbnails, and the video player,
+            for example. But we know the videos themselves don't live in our
+            browser; They come from YouTube, somehow!
+        </p>
+        <p>
+            In this example, YouTube is our system. When Google is discussing
+            how to design YouTube, they would refer to it's architecture pattern
+            as a 'client-server' architecture pattern, where Google acts as the
+            server and your browser acts as the client.
+        </p>
+        <Heading title="Clients" />
+        <p>
+            A client is not <em>just a web browser</em> though! A client can be
+            many things.
+        </p>
+        <p>
+            I like to define a client like so: If it is something that I
+            interact with that requests information, data, or processes things
+            somewhere else, it's a client.
+        </p>
+        <p>
+            A good example is a web browser, because none of the content we see
+            inside of a browser is from the browser itself. The browser's job is
+            to ask for content from a server, like YouTube. YouTube then
+            responds with data, and the browser displays it for you.
+        </p>
+        <p>For programmers, here's another example:</p>
+        <p>
+            A CLI (Command-Line Interface) tool that you use inside of a
+            terminal can act as a client as well. Often, these programs are
+            split into two distinct portions. One half will handle the display
+            of information for you, and the other half "does the work", whatever
+            that tool is supposed to do. A video converter might have a 'client'
+            package that displays information and a 'server' package that
+            performs the conversion.
+        </p>
+        <p>
+            Many CLI tools and other applications use this model, so the code in
+            the 'server' package can be re-used with other clients, such as a
+            web site, a GUI, or a REST API.
+        </p>
+        <Heading title="Servers" />
+        <p>
+            A server is (more or less) another word for a computer. Any
+            computer, including the phone or desktop you're reading this on, can
+            be a server.
+        </p>
+        <p>
+            I like to this of a server like this: If it's a computer that
+            "serves" me data or information, such as feedback, images, or
+            videos, it's a server.
+        </p>
+        <p>
+            A silly example is to think of a server in a restaraunt. A server
+            literally serves you food. In a similar sense, a computer server
+            literally serves you data.
+        </p>
+        <p>
+            In the client-server architecture pattern, it's the server's job to
+            receive input from a client, perform an action of some sort, such as
+            converting data from one format into another, and then respond with
+            data that the client can use.
+        </p>
+        <Heading title="Interactivity: Talk to the server!" />
+        <p>Click the button below. It will:</p>
+        <ul>
+            <li>1. Send an HTTP request to the server hosting this blog</li>
+            <li>2. Process the request</li>
+            <li>3. Respond with data</li>
+        </ul>
+        <div class="flex w-full justify-center">
+            <button
+                @click="callServer"
+                class="cursor-pointer rounded-lg border border-orange-500/40 bg-slate-700/80 p-2 backdrop-blur-sm transition-all duration-100 active:-translate-y-0.5 active:scale-105"
+            >
+                Click me!
+            </button>
+        </div>
+        <div id="response"></div>
+        <Heading title="YouTube Example: Tying it together" />
+        <p>
+            Going back to our YouTube example, we can see how it all works
+            together.
+        </p>
+        <p>
+            Our browser is a client. When we click a video, our browser sends a
+            request to YouTube asking for the video to play. YouTube is the
+            server, and it processes your request, finds the right video, and
+            sends it back to your browser, the client, to be played.
+        </p>
+        <Heading title="More Practical Programming Examples" />
+        <p>
+            This pattern is very convienient because it matches our "HTTP
+            Request Lifecycle" model very well, where a client will send an HTTP
+            request to a server and recieve an HTTP response.
+        </p>
+        <p>
+            It's not just applicable to web sites and apps though! As mentioned
+            earlier, we can use this in a variety of apps if we apply the
+            correct mental model.
+        </p>
+        <p>
+            Imagine a calculator app. At face value, it seems like a single
+            application. A single screen, or GUI, it has buttons, input an
+            expression and the result is shown to us.
+        </p>
+        <p>
+            In the code itself though, it may be structured like a client and
+            server instead though, where the client is the GUI that accepts user
+            input, and the server is the acutal calculator logic that performs
+            the math and returns results.
+        </p>
+        <Heading title="What are some benefits to this approach?" />
+        <p>
+            1. It allows us to easily upgrade the client, meaning if we want to
+            change how the UI looks, we don't need to re-write ANY of the 'math'
+            code, we only need to change the UI code.
+        </p>
+        <p>
+            2. It allows us to easily support a different client entirely. We
+            could create a new client that's a CLI tool, a website, a REST API,
+            whatever we want! As long as the client can send a "request", or
+            talk to, the server, our math code, we can use ANY client without
+            having to change our server.
+        </p>
+        <p>
+            3. Separation of concerns. This is a 'programming rule' that you
+            might have heard thrown around. While it's not gospel and we don't
+            always need to adhere to it, it is good advice. Essentially, keep
+            related code grouped together, and unrelated code separate. In our
+            case, the UI code and the math code should be kept apart. This
+            allows us to organize our project better so it's easier to find and
+            debug things.
+        </p>
+    </Post>
 </template>
