@@ -5,10 +5,37 @@ import Post from './Post.vue';
 import blogPosts from './post-list';
 const tableOfContents = ['Skeleton', 'Definitions', 'Clients', 'Servers'];
 
-// TODO - send an HTTP request to the server
-function callServer() {
-    const response_element = document.getElementById('response');
-    if (response_element) response_element.innerHTML = 'Hi from the server!';
+import { ref } from 'vue';
+
+interface ServerTimeResponse {
+    time: string;
+    formatted: string;
+    timezone: string;
+}
+
+const serverResponse = ref<ServerTimeResponse | null>(null);
+const isLoading = ref(false);
+const error = ref<string | null>(null);
+
+// Send an HTTP request to the server
+async function callServer() {
+    isLoading.value = true;
+    error.value = null;
+    serverResponse.value = null;
+
+    try {
+        const response = await fetch('/api/server-time');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        serverResponse.value = data;
+    } catch (err) {
+        error.value =
+            err instanceof Error ? err.message : 'An unknown error occurred';
+    } finally {
+        isLoading.value = false;
+    }
 }
 </script>
 <template>
@@ -144,7 +171,52 @@ function callServer() {
                 Click me!
             </button>
         </div>
-        <div id="response"></div>
+        <div
+            class="mt-6 rounded-lg border border-orange-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
+        >
+            <h3 class="mb-4 text-lg font-semibold text-orange-400">
+                Server Response
+            </h3>
+
+            <div v-if="isLoading" class="text-center text-slate-300">
+                <div class="animate-pulse">Loading server response...</div>
+            </div>
+
+            <div v-else-if="error" class="text-red-400">
+                <strong>Error:</strong> {{ error }}
+            </div>
+
+            <div v-else-if="serverResponse" class="space-y-3">
+                <div class="text-green-400">
+                    <strong>✓ Success!</strong> The server responded with:
+                </div>
+
+                <div class="rounded bg-slate-900/50 p-4 font-mono text-sm">
+                    <div class="text-slate-300">
+                        <span class="text-blue-300">Server Time:</span>
+                        <span class="text-yellow-300">{{
+                            serverResponse.formatted
+                        }}</span>
+                    </div>
+                    <div class="mt-2 text-slate-300">
+                        <span class="text-blue-300">Timezone:</span>
+                        <span class="text-yellow-300">{{
+                            serverResponse.timezone
+                        }}</span>
+                    </div>
+                    <div class="mt-2 text-slate-300">
+                        <span class="text-blue-300">ISO Format:</span>
+                        <span class="text-yellow-300">{{
+                            serverResponse.time
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div v-else class="text-slate-400 italic">
+                Click the button above to see the server's response!
+            </div>
+        </div>
         <Heading title="YouTube Example: Tying it together" />
         <p>
             Going back to our YouTube example, we can see how it all works
