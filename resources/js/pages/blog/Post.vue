@@ -127,7 +127,7 @@ const props = defineProps<{
                             class="font-bold text-orange-400 underline"
                             >Portfolio</Link
                         >
-                        page if you'd like to learn more of get in touch with
+                        page if you'd like to learn more or get in touch with
                         me.
                     </p>
                 </div>

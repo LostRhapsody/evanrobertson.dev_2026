@@ -3,7 +3,17 @@ import Heading from '@/components/Heading.vue';
 import Image from '@/components/Image.vue';
 import Post from './Post.vue';
 import blogPosts from './post-list';
-const tableOfContents = ['Skeleton', 'Definitions', 'Clients', 'Servers'];
+const tableOfContents = [
+    'What is a Simple Man\s Summary?',
+    'So What is Client-Server Architecture?',
+    'Architecture',
+    'Clients',
+    'Servers',
+    'Interactivity: Talk to the server!',
+    'YouTube Example: Tying it together',
+    'More Practical Programming Examples',
+    'What are some benefits to this approach?',
+];
 
 import { ref } from 'vue';
 
@@ -53,7 +63,7 @@ async function callServer() {
         </p>
         <p>
             One of those concepts was client-server architecutre. What does it
-            mean, what does it apply to?
+            mean? What does it apply to?
         </p>
         <p>
             If you're coming from a technical background, you probably have the
@@ -95,7 +105,7 @@ async function callServer() {
             When you visit YouTube in your browser, you see lots of content that
             lives in your browser, buttons, thumbnails, and the video player,
             for example. But we know the videos themselves don't live in our
-            browser; They come from YouTube, somehow!
+            browser; they come from YouTube, somehow!
         </p>
         <p>
             In this example, YouTube is our system. When Google is discussing
@@ -134,6 +144,7 @@ async function callServer() {
             the 'server' package can be re-used with other clients, such as a
             web site, a GUI, or a REST API.
         </p>
+        <p>TODO: Add callout with definitions</p>
         <Heading title="Servers" />
         <p>
             A server is (more or less) another word for a computer. Any
@@ -141,8 +152,8 @@ async function callServer() {
             be a server.
         </p>
         <p>
-            I like to this of a server like this: If it's a computer that
-            "serves" me data or information, such as feedback, images, or
+            I like to think of a server like this: If it's a computer that
+            <em>serves</em> me data or information, such as feedback, images, or
             videos, it's a server.
         </p>
         <p>
@@ -241,8 +252,8 @@ async function callServer() {
         </p>
         <p>
             Imagine a calculator app. At face value, it seems like a single
-            application. A single screen, or GUI, it has buttons, input an
-            expression and the result is shown to us.
+            application. A single screen, or GUI, with buttons that we input an
+            expression into and the result is shown to us.
         </p>
         <p>
             In the code itself though, it may be structured like a client and
