@@ -12,6 +12,11 @@
 </script>
 <template>
    <Post :title=blogPosts[0].title :date=blogPosts[0].date :outline=tableOfContents>
+      <Heading title="WIP Notice" />
+      <p>This is a work in process, but I haven't disabled the auto-deploy system for this website yet, so as soon as I
+         save my changes to github, this will be LIVE. Which is fine and not a big deal. Just letting you know, this
+         blog post is about 10% done.</p>
+      <Heading title="End of WIP Notice" />
       <p>The amount of technical jargon we are bombarded with daily is overwhelming, especially when you're first
          learning. Being a studen in College learning about programming and networking, lots of simple concepts went
          over my head, just due to how convuluted it sounded, while in practice being not that complex at all!</p>
