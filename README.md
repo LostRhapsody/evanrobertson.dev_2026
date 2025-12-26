@@ -15,3 +15,17 @@ I'm a full-stack developer, and this is a simple example website I use as my por
 [Github](https://github.com/evanrobertson)
 [LinkedIn](https://www.linkedin.com/in/evan-robertson-dev/)
 [Portfolio](https://evanrobertson.dev)
+
+## Getting Started (Development)
+
+If you're interested in running this site locally, or your ME and forgot what to do, run these commands to install dependencies and test the build step:
+
+```bash
+npm i && composer install && npm run build
+```
+
+And this command to run the dev server:
+
+```bash
+composer dev
+```
