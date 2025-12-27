@@ -152,12 +152,17 @@ async function callServer() {
             be a server.
         </p>
         <p>
-            I like to think of a server like this: If it's a computer that
+            I like to think of a server like this: If it's a computer running
+            sofware that
             <em>serves</em> me data or information, such as feedback, images, or
             videos, it's a server.
         </p>
         <p>
-            A silly example is to think of a server in a restaraunt. A server
+            TODO: Add callout, a server is a piece of software, not the computer
+            itself.
+        </p>
+        <p>
+            A silly example is to think of a server in a restaurant. A server
             literally serves you food. In a similar sense, a computer server
             literally serves you data.
         </p>
@@ -241,9 +246,9 @@ async function callServer() {
         </p>
         <Heading title="More Practical Programming Examples" />
         <p>
-            This pattern is very convienient because it matches our "HTTP
-            Request Lifecycle" model very well, where a client will send an HTTP
-            request to a server and recieve an HTTP response.
+            This pattern is very convenient because it matches our "HTTP Request
+            Lifecycle" model very well, where a client will send an HTTP request
+            to a server and receive an HTTP response.
         </p>
         <p>
             It's not just applicable to web sites and apps though! As mentioned
@@ -255,10 +260,11 @@ async function callServer() {
             application. A single screen, or GUI, with buttons that we input an
             expression into and the result is shown to us.
         </p>
+        <p>TODO: Example, calculator app</p>
         <p>
             In the code itself though, it may be structured like a client and
             server instead though, where the client is the GUI that accepts user
-            input, and the server is the acutal calculator logic that performs
+            input, and the server is the actual calculator logic that performs
             the math and returns results.
         </p>
         <Heading title="What are some benefits to this approach?" />
@@ -282,6 +288,14 @@ async function callServer() {
             case, the UI code and the math code should be kept apart. This
             allows us to organize our project better so it's easier to find and
             debug things.
+        </p>
+        <p>
+            todo: 1. **"When NOT to Use Client-Server Architecture"** - Brief
+            section about when simpler approaches work better (like basic
+            scripts, standalone tools) 2. **"What's Next?"** - Mention related
+            concepts they might explore next (microservices, APIs, distributed
+            systems) 3. **"Wrapping Up"** - A conclusion that reinforces the
+            main takeaway with a call to action
         </p>
     </Post>
 </template>
