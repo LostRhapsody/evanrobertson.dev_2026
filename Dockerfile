@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1.7
 
-FROM php:8.4-cli-bookworm AS build
+ARG PHP_VERSION=8.4.1
+
+FROM php:${PHP_VERSION}-cli-bookworm AS build
 WORKDIR /app
 
 RUN set -eux; \
@@ -9,7 +11,9 @@ RUN set -eux; \
         ca-certificates \
         curl \
         git \
+        libsqlite3-dev \
         libzip-dev \
+        pkg-config \
         unzip \
     ; \
     docker-php-ext-install -j"$(nproc)" \
@@ -41,13 +45,15 @@ RUN npm run build; \
     composer dump-autoload --no-dev --optimize
 
 
-FROM php:8.4-apache-bookworm AS app
+FROM php:${PHP_VERSION}-apache-bookworm AS app
 WORKDIR /var/www/html
 
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+        libsqlite3-dev \
         libzip-dev \
+        pkg-config \
     ; \
     docker-php-ext-install -j"$(nproc)" \
         opcache \
