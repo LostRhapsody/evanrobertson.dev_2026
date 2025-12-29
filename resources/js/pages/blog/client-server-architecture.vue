@@ -2,9 +2,9 @@
 import Callout from '@/components/Callout.vue';
 import Heading from '@/components/Heading.vue';
 import Image from '@/components/Image.vue';
+import { ref } from 'vue';
 import Post from './Post.vue';
 import blogPosts from './post-list';
-import { ref } from 'vue';
 
 const tableOfContents = [
     "What is a Simple Man's Summary?",
@@ -120,7 +120,9 @@ async function calcEquals() {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            throw new Error(
+                errorData.message || `HTTP error! status: ${response.status}`,
+            );
         }
 
         const data = await response.json();
