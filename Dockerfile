@@ -69,6 +69,8 @@ RUN set -eux; \
         zip \
     ; \
     a2enmod rewrite headers; \
+    a2dismod mpm_event mpm_worker || true; \
+    a2enmod mpm_prefork; \
     rm -rf /var/lib/apt/lists/*
 
 # Ensure Apache serves the Laravel public/ directory.
