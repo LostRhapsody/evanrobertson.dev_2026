@@ -29,3 +29,44 @@ And this command to run the dev server:
 ```bash
 composer dev
 ```
+
+## Linting & Testing
+
+### Frontend (JavaScript/TypeScript/Vue)
+
+```bash
+# Lint and auto-fix code
+npm run lint
+
+# Format code with Prettier
+npm run format
+
+# Check if code is formatted correctly (CI)
+npm run format:check
+```
+
+### Backend (PHP)
+
+```bash
+# Format PHP code with Laravel Pint
+vendor/bin/pint
+
+# Format only changed files
+vendor/bin/pint --dirty
+```
+
+### Testing
+
+```bash
+# Run all tests (Pest)
+php artisan test
+
+# Or using composer
+composer test
+
+# Run specific test file
+php artisan test tests/Feature/CalculatorTest.php
+
+# Run tests matching a filter
+php artisan test --filter=calculator
+```

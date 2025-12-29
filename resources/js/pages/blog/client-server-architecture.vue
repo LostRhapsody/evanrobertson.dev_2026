@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import Callout from '@/components/Callout.vue';
 import Heading from '@/components/Heading.vue';
 import Image from '@/components/Image.vue';
 import Post from './Post.vue';
 import blogPosts from './post-list';
+import { ref } from 'vue';
+
 const tableOfContents = [
-    'What is a Simple Man\s Summary?',
+    "What is a Simple Man's Summary?",
     'So What is Client-Server Architecture?',
     'Architecture',
     'Clients',
@@ -13,9 +16,9 @@ const tableOfContents = [
     'YouTube Example: Tying it together',
     'More Practical Programming Examples',
     'What are some benefits to this approach?',
+    'Wrapping Things Up',
+    'Calculator Example: Putting It All Together',
 ];
-
-import { ref } from 'vue';
 
 interface ServerTimeResponse {
     time: string;
@@ -27,7 +30,6 @@ const serverResponse = ref<ServerTimeResponse | null>(null);
 const isLoading = ref(false);
 const error = ref<string | null>(null);
 
-// Send an HTTP request to the server
 async function callServer() {
     isLoading.value = true;
     error.value = null;
@@ -45,6 +47,92 @@ async function callServer() {
             err instanceof Error ? err.message : 'An unknown error occurred';
     } finally {
         isLoading.value = false;
+    }
+}
+
+interface CalculatorResponse {
+    number1: number;
+    number2: number;
+    operation: string;
+    result: number;
+}
+
+const calcDisplay = ref('0');
+const calcNumber1 = ref<number | null>(null);
+const calcNumber2 = ref<number | null>(null);
+const calcOperation = ref<'add' | 'subtract' | null>(null);
+const calcResult = ref<CalculatorResponse | null>(null);
+const calcIsLoading = ref(false);
+const calcError = ref<string | null>(null);
+const calcIsNewNumber = ref(true);
+
+function calcInputDigit(digit: string) {
+    if (calcIsNewNumber.value) {
+        calcDisplay.value = digit;
+        calcIsNewNumber.value = false;
+    } else {
+        calcDisplay.value =
+            calcDisplay.value === '0' ? digit : calcDisplay.value + digit;
+    }
+}
+
+function calcSetOperation(op: 'add' | 'subtract') {
+    calcNumber1.value = parseFloat(calcDisplay.value);
+    calcOperation.value = op;
+    calcIsNewNumber.value = true;
+    calcResult.value = null;
+    calcError.value = null;
+}
+
+function calcClear() {
+    calcDisplay.value = '0';
+    calcNumber1.value = null;
+    calcNumber2.value = null;
+    calcOperation.value = null;
+    calcResult.value = null;
+    calcError.value = null;
+    calcIsNewNumber.value = true;
+}
+
+async function calcEquals() {
+    if (calcNumber1.value === null || calcOperation.value === null) {
+        return;
+    }
+
+    calcNumber2.value = parseFloat(calcDisplay.value);
+    calcIsLoading.value = true;
+    calcError.value = null;
+    calcResult.value = null;
+
+    try {
+        const response = await fetch('/api/calculator', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify({
+                number1: calcNumber1.value,
+                number2: calcNumber2.value,
+                operation: calcOperation.value,
+            }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        calcResult.value = data;
+        calcDisplay.value = String(data.result);
+        calcNumber1.value = data.result;
+        calcIsNewNumber.value = true;
+    } catch (err) {
+        calcError.value =
+            err instanceof Error ? err.message : 'An unknown error occurred';
+    } finally {
+        calcIsLoading.value = false;
     }
 }
 </script>
@@ -144,7 +232,55 @@ async function callServer() {
             the 'server' package can be re-used with other clients, such as a
             web site, a GUI, or a REST API.
         </p>
-        <p>TODO: Add callout with definitions</p>
+        <Callout type="info" title="Key Terms">
+            <ul class="list-disc space-y-2 pl-4">
+                <li>
+                    <strong>GUI</strong> (Graphical User Interface): A visual
+                    interface with windows, icons, and buttons that allows users
+                    to interact with software.
+                    <a
+                        href="https://en.wikipedia.org/wiki/Graphical_user_interface"
+                        target="_blank"
+                        class="text-blue-400 underline hover:text-blue-300"
+                        >Learn more</a
+                    >
+                </li>
+                <li>
+                    <strong>HTTP</strong> (Hypertext Transfer Protocol): The
+                    protocol used to transfer data on the web. It defines how
+                    messages are formatted and transmitted between clients and
+                    servers.
+                    <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/HTTP"
+                        target="_blank"
+                        class="text-blue-400 underline hover:text-blue-300"
+                        >MDN Docs</a
+                    >
+                </li>
+                <li>
+                    <strong>REST</strong> (Representational State Transfer): An
+                    architectural style for designing networked applications,
+                    using standard HTTP methods like GET and POST.
+                    <a
+                        href="https://developer.mozilla.org/en-US/docs/Glossary/REST"
+                        target="_blank"
+                        class="text-blue-400 underline hover:text-blue-300"
+                        >MDN Docs</a
+                    >
+                </li>
+                <li>
+                    <strong>API</strong> (Application Programming Interface): A
+                    set of rules that allows different software applications to
+                    communicate with each other.
+                    <a
+                        href="https://developer.mozilla.org/en-US/docs/Glossary/API"
+                        target="_blank"
+                        class="text-blue-400 underline hover:text-blue-300"
+                        >MDN Docs</a
+                    >
+                </li>
+            </ul>
+        </Callout>
         <Heading title="Servers" />
         <p>
             A server is (more or less) another word for a computer. Any
@@ -283,5 +419,219 @@ async function callServer() {
             allows us to organize our project better so it's easier to find and
             debug things.
         </p>
+        <Heading title="Wrapping Things Up" />
+        <p>
+            We've covered a lot of ground! Let's quickly recap what we've
+            learned about client-server architecture:
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+            <li>
+                <strong>Architecture</strong> refers to how we design and
+                structure a system.
+            </li>
+            <li>
+                <strong>Clients</strong> are the interfaces we interact with
+                that request data or processing from somewhere else.
+            </li>
+            <li>
+                <strong>Servers</strong> are computers that receive requests,
+                process them, and send back responses.
+            </li>
+            <li>
+                This pattern is everywhere: websites, apps, CLI tools, and even
+                desktop applications.
+            </li>
+        </ul>
+        <p>
+            The beauty of client-server architecture is its simplicity and
+            flexibility. By separating what the user sees (the client) from
+            where the work happens (the server), we can build more maintainable,
+            reusable, and scalable applications.
+        </p>
+        <Callout type="tip" title="Remember">
+            <p>
+                The client-server model isn't just for web development. Any time
+                you have a separation between an interface and the logic that
+                powers it, you're using this pattern!
+            </p>
+        </Callout>
+        <Heading title="Calculator Example: Putting It All Together" />
+        <p>
+            Now let's put everything we've learned into practice! Below is a
+            simple calculator that demonstrates the client-server architecture
+            in action.
+        </p>
+        <p>
+            <strong>How it works:</strong>
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+            <li>
+                <strong>The Client (what you see):</strong> The calculator UI
+                below is the client. It displays the number pad, captures your
+                input, and shows results.
+            </li>
+            <li>
+                <strong>The Server (where the math happens):</strong> When you
+                press "=", the client sends your numbers and operation to the
+                server. The server performs the actual calculation and sends
+                back the result.
+            </li>
+        </ul>
+        <Callout type="info" title="Why do it this way?">
+            <p>
+                For a simple calculator, doing the math on the server might seem
+                like overkill. But this demonstrates the pattern perfectly! In a
+                real application, the "server" might be performing complex
+                calculations, accessing a database, or processing data that
+                can't be done on the client.
+            </p>
+        </Callout>
+        <p>Try it out:</p>
+        <!-- Calculator UI -->
+        <div
+            class="mx-auto mt-6 max-w-sm rounded-lg border border-orange-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
+        >
+            <h3 class="mb-4 text-center text-lg font-semibold text-orange-400">
+                Client-Server Calculator
+            </h3>
+
+            <!-- Display -->
+            <div
+                class="mb-4 rounded bg-slate-900/70 p-4 text-right font-mono text-2xl text-green-400"
+            >
+                {{ calcDisplay }}
+            </div>
+
+            <!-- Operation indicator -->
+            <div
+                v-if="calcOperation"
+                class="mb-2 text-center text-sm text-orange-300"
+            >
+                {{ calcNumber1 }} {{ calcOperation === 'add' ? '+' : '-' }} ...
+            </div>
+
+            <!-- Number pad -->
+            <div class="grid grid-cols-4 gap-2">
+                <!-- Row 1: 7, 8, 9, + -->
+                <button
+                    v-for="digit in ['7', '8', '9']"
+                    :key="digit"
+                    @click="calcInputDigit(digit)"
+                    class="cursor-pointer rounded bg-slate-700 p-3 font-mono text-lg text-orange-100 transition-colors hover:bg-slate-600 active:bg-slate-500"
+                >
+                    {{ digit }}
+                </button>
+                <button
+                    @click="calcSetOperation('add')"
+                    :class="[
+                        'cursor-pointer rounded p-3 font-mono text-lg transition-colors',
+                        calcOperation === 'add'
+                            ? 'bg-orange-600 text-white'
+                            : 'bg-orange-500/30 text-orange-300 hover:bg-orange-500/50',
+                    ]"
+                >
+                    +
+                </button>
+
+                <!-- Row 2: 4, 5, 6, - -->
+                <button
+                    v-for="digit in ['4', '5', '6']"
+                    :key="digit"
+                    @click="calcInputDigit(digit)"
+                    class="cursor-pointer rounded bg-slate-700 p-3 font-mono text-lg text-orange-100 transition-colors hover:bg-slate-600 active:bg-slate-500"
+                >
+                    {{ digit }}
+                </button>
+                <button
+                    @click="calcSetOperation('subtract')"
+                    :class="[
+                        'cursor-pointer rounded p-3 font-mono text-lg transition-colors',
+                        calcOperation === 'subtract'
+                            ? 'bg-orange-600 text-white'
+                            : 'bg-orange-500/30 text-orange-300 hover:bg-orange-500/50',
+                    ]"
+                >
+                    -
+                </button>
+
+                <!-- Row 3: 1, 2, 3, = -->
+                <button
+                    v-for="digit in ['1', '2', '3']"
+                    :key="digit"
+                    @click="calcInputDigit(digit)"
+                    class="cursor-pointer rounded bg-slate-700 p-3 font-mono text-lg text-orange-100 transition-colors hover:bg-slate-600 active:bg-slate-500"
+                >
+                    {{ digit }}
+                </button>
+                <button
+                    @click="calcEquals"
+                    :disabled="calcIsLoading"
+                    class="cursor-pointer rounded bg-green-600 p-3 font-mono text-lg text-white transition-colors hover:bg-green-500 active:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                    {{ calcIsLoading ? '...' : '=' }}
+                </button>
+
+                <!-- Row 4: C, 0, (empty), (empty) -->
+                <button
+                    @click="calcClear"
+                    class="cursor-pointer rounded bg-red-500/30 p-3 font-mono text-lg text-red-300 transition-colors hover:bg-red-500/50 active:bg-red-500/70"
+                >
+                    C
+                </button>
+                <button
+                    @click="calcInputDigit('0')"
+                    class="col-span-2 cursor-pointer rounded bg-slate-700 p-3 font-mono text-lg text-orange-100 transition-colors hover:bg-slate-600 active:bg-slate-500"
+                >
+                    0
+                </button>
+            </div>
+
+            <!-- Error display -->
+            <div v-if="calcError" class="mt-4 text-center text-sm text-red-400">
+                <strong>Error:</strong> {{ calcError }}
+            </div>
+
+            <!-- Result from server -->
+            <div v-if="calcResult" class="mt-4 rounded bg-slate-900/50 p-3">
+                <div class="text-xs text-slate-400">Server Response:</div>
+                <div class="font-mono text-sm text-green-400">
+                    {{ calcResult.number1 }}
+                    {{ calcResult.operation === 'add' ? '+' : '-' }}
+                    {{ calcResult.number2 }} = {{ calcResult.result }}
+                </div>
+            </div>
+        </div>
+        <p class="mt-6">
+            <strong>What just happened?</strong> When you clicked "=", the
+            following occurred:
+        </p>
+        <ul class="list-decimal space-y-2 pl-6">
+            <li>
+                The client (this page) collected your input: the two numbers and
+                the operation you selected.
+            </li>
+            <li>
+                The client sent an HTTP POST request to the server at
+                <code class="rounded bg-slate-700 px-1 text-orange-300"
+                    >/api/calculator</code
+                >
+                with your data.
+            </li>
+            <li>
+                The server received the request, performed the calculation
+                (addition or subtraction), and sent back the result.
+            </li>
+            <li>The client received the response and displayed the result.</li>
+        </ul>
+        <Callout type="note" title="Real-world applications">
+            <p>
+                This exact pattern powers everything from search engines to
+                banking apps. The complexity of the "calculation" on the server
+                can range from simple math to machine learning models, database
+                queries, or complex business logic. The client never needs to
+                know the details—it just sends a request and receives a
+                response!
+            </p>
+        </Callout>
     </Post>
 </template>
