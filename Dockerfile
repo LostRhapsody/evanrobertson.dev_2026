@@ -11,12 +11,15 @@ RUN set -eux; \
         ca-certificates \
         curl \
         git \
+        libicu-dev \
         libsqlite3-dev \
         libzip-dev \
         pkg-config \
         unzip \
     ; \
     docker-php-ext-install -j"$(nproc)" \
+        bcmath \
+        intl \
         pdo \
         pdo_mysql \
         pdo_sqlite \
@@ -34,7 +37,7 @@ RUN set -eux; \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-interaction --prefer-dist --no-progress --optimize-autoloader
+RUN composer install --no-dev --no-interaction --prefer-dist --no-progress --optimize-autoloader --no-scripts
 
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -51,11 +54,14 @@ WORKDIR /var/www/html
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+        libicu-dev \
         libsqlite3-dev \
         libzip-dev \
         pkg-config \
     ; \
     docker-php-ext-install -j"$(nproc)" \
+        bcmath \
+        intl \
         opcache \
         pdo \
         pdo_mysql \
