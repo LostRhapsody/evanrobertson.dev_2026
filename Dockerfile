@@ -69,9 +69,17 @@ RUN set -eux; \
         zip \
     ; \
     a2enmod rewrite headers; \
-    a2dismod mpm_event mpm_worker || true; \
-    a2enmod mpm_prefork; \
     rm -rf /var/lib/apt/lists/*
+
+# Configure Apache MPM - ensure only prefork is enabled
+# Disable all MPMs first, then enable only prefork
+RUN set -eux; \
+    for mpm in mpm_event mpm_worker mpm_prefork; do \
+        if [ -f /etc/apache2/mods-enabled/${mpm}.load ]; then \
+            a2dismod ${mpm} || true; \
+        fi; \
+    done; \
+    a2enmod mpm_prefork
 
 # Ensure Apache serves the Laravel public/ directory.
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
