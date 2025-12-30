@@ -1,9 +1,11 @@
-<!-- 
+<!--
     Accepts title and optional description.
     Auto-assigns an ID using the title, so it should be 1 unique heading per-page.
-    Spaces in the title are replaced with "-" so use a "-" when referencing with an anchor `<a>` tag.
+    Uses URL-safe slug for the ID.
 -->
 <script setup lang="ts">
+import { toSlug } from '@/lib/utils';
+
 interface Props {
     title: string;
     description?: string;
@@ -11,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const id = props.title.replace(' ', '-');
+const id = toSlug(props.title);
 </script>
 
 <template>

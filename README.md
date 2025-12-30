@@ -30,12 +30,12 @@ And this command to run the dev server:
 composer dev
 ```
 
-## Linting & Testing
+## Linting & Formatting
 
-### Frontend (JavaScript/TypeScript/Vue)
+This project uses ESLint and Prettier for JavaScript/TypeScript/Vue code formatting, and Laravel Pint for PHP code formatting.
 
 ```bash
-# Lint and auto-fix code
+# Lint and fix JavaScript/TypeScript/Vue files
 npm run lint
 
 # Format code with Prettier

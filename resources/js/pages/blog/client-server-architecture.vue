@@ -13,8 +13,9 @@ const tableOfContents = [
     'Clients',
     'Servers',
     'Interactivity: Talk to the server!',
-    'YouTube Example: Tying it together',
+    'YouTube Example',
     'More Practical Programming Examples',
+    'Calculator Example: Putting It All Together',
     'What are some benefits to this approach?',
     'Wrapping Things Up',
     'Calculator Example: Putting It All Together',
@@ -178,7 +179,7 @@ async function calcEquals() {
         <a target="_" href="https://grugbrain.dev/">
             <Image
                 src="https://grugbrain.dev/grug.png"
-                alt="The grug brained developer meme/logo/image"
+                alt="The grug brained developer meme/logo/image. I recommend giving them a visit later!"
                 align="center"
                 width="300px"
             />
@@ -239,7 +240,8 @@ async function calcEquals() {
                 <li>
                     <strong>GUI</strong> (Graphical User Interface): A visual
                     interface with windows, icons, and buttons that allows users
-                    to interact with software.
+                    to interact with software. e.g. the calculator app on your
+                    PC.
                     <a
                         href="https://en.wikipedia.org/wiki/Graphical_user_interface"
                         target="_blank"
@@ -290,12 +292,13 @@ async function calcEquals() {
             be a server.
         </p>
         <p>
-            I like to think of a server like this: If it's a computer that
+            I like to think of a server like this: If it's a computer running
+            sofware that
             <em>serves</em> me data or information, such as feedback, images, or
             videos, it's a server.
         </p>
         <p>
-            A silly example is to think of a server in a restaraunt. A server
+            A silly example is to think of a server in a restaurant. A server
             literally serves you food. In a similar sense, a computer server
             literally serves you data.
         </p>
@@ -305,6 +308,21 @@ async function calcEquals() {
             converting data from one format into another, and then respond with
             data that the client can use.
         </p>
+        <Callout type="info" title="What is a server?">
+            <p>
+                A server is a piece of software, not the computer hardware
+                itself. A practical example is an 'HTTP Server'. This is very
+                common software built into a lot of applications. It's main job
+                is to wait for HTTP requests to come in so it can digest it and
+                pass the data onto the next software piece.
+                <a
+                    href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server"
+                    target="_blank"
+                    class="text-blue-400 underline hover:text-blue-300"
+                    >Learn more</a
+                >
+            </p>
+        </Callout>
         <Heading title="Interactivity: Talk to the server!" />
         <p>Click the button below. It will:</p>
         <ul>
@@ -366,7 +384,7 @@ async function calcEquals() {
                 Click the button above to see the server's response!
             </div>
         </div>
-        <Heading title="YouTube Example: Tying it together" />
+        <Heading title="YouTube Example" />
         <p>
             Going back to our YouTube example, we can see how it all works
             together.
@@ -379,9 +397,9 @@ async function calcEquals() {
         </p>
         <Heading title="More Practical Programming Examples" />
         <p>
-            This pattern is very convienient because it matches our "HTTP
-            Request Lifecycle" model very well, where a client will send an HTTP
-            request to a server and recieve an HTTP response.
+            This pattern is very convenient because it matches our "HTTP Request
+            Lifecycle" model very well, where a client will send an HTTP request
+            to a server and receive an HTTP response.
         </p>
         <p>
             It's not just applicable to web sites and apps though! As mentioned
@@ -396,79 +414,21 @@ async function calcEquals() {
         <p>
             In the code itself though, it may be structured like a client and
             server instead though, where the client is the GUI that accepts user
-            input, and the server is the acutal calculator logic that performs
+            input, and the server is the actual calculator logic that performs
             the math and returns results.
         </p>
-        <Heading title="What are some benefits to this approach?" />
-        <p>
-            1. It allows us to easily upgrade the client, meaning if we want to
-            change how the UI looks, we don't need to re-write ANY of the 'math'
-            code, we only need to change the UI code.
-        </p>
-        <p>
-            2. It allows us to easily support a different client entirely. We
-            could create a new client that's a CLI tool, a website, a REST API,
-            whatever we want! As long as the client can send a "request", or
-            talk to, the server, our math code, we can use ANY client without
-            having to change our server.
-        </p>
-        <p>
-            3. Separation of concerns. This is a 'programming rule' that you
-            might have heard thrown around. While it's not gospel and we don't
-            always need to adhere to it, it is good advice. Essentially, keep
-            related code grouped together, and unrelated code separate. In our
-            case, the UI code and the math code should be kept apart. This
-            allows us to organize our project better so it's easier to find and
-            debug things.
-        </p>
-        <Heading title="Wrapping Things Up" />
-        <p>
-            We've covered a lot of ground! Let's quickly recap what we've
-            learned about client-server architecture:
-        </p>
-        <ul class="list-disc space-y-2 pl-6">
-            <li>
-                <strong>Architecture</strong> refers to how we design and
-                structure a system.
-            </li>
-            <li>
-                <strong>Clients</strong> are the interfaces we interact with
-                that request data or processing from somewhere else.
-            </li>
-            <li>
-                <strong>Servers</strong> are computers that receive requests,
-                process them, and send back responses.
-            </li>
-            <li>
-                This pattern is everywhere: websites, apps, CLI tools, and even
-                desktop applications.
-            </li>
-        </ul>
-        <p>
-            The beauty of client-server architecture is its simplicity and
-            flexibility. By separating what the user sees (the client) from
-            where the work happens (the server), we can build more maintainable,
-            reusable, and scalable applications.
-        </p>
-        <Callout type="tip" title="Remember">
-            <p>
-                The client-server model isn't just for web development. Any time
-                you have a separation between an interface and the logic that
-                powers it, you're using this pattern!
-            </p>
-        </Callout>
         <Heading title="Calculator Example: Putting It All Together" />
         <p>
-            Now let's put everything we've learned into practice! Below is a
-            simple calculator that demonstrates the client-server architecture
-            in action.
+            The best way to learn is to see a practical, hands-on example. Below
+            is a simple calculator that demonstrates the client-server
+            architecture in action.
         </p>
         <p>
             <strong>How it works:</strong>
         </p>
         <ul class="list-disc space-y-2 pl-6">
             <li>
-                <strong>The Client (what you see):</strong> The calculator UI
+                <strong>The Client (this website):</strong> The calculator UI
                 below is the client. It displays the number pad, captures your
                 input, and shows results.
             </li>
@@ -478,17 +438,25 @@ async function calcEquals() {
                 server. The server performs the actual calculation and sends
                 back the result.
             </li>
+            <li>
+                <strong>No math is performed</strong> on this website. It's all
+                done on the server that is sending this website to your
+                computer.
+            </li>
         </ul>
-        <Callout type="info" title="Why do it this way?">
+        <Callout type="tip" title="Why do it this way?">
             <p>
                 For a simple calculator, doing the math on the server might seem
-                like overkill. But this demonstrates the pattern perfectly! In a
+                like overkill. But this demonstrates the pattern very well. In a
                 real application, the "server" might be performing complex
                 calculations, accessing a database, or processing data that
                 can't be done on the client.
             </p>
         </Callout>
-        <p>Try it out:</p>
+        <p>
+            Our example calculator supports addition and subtraction operations
+            with 2 operands. Try it out:
+        </p>
         <!-- Calculator UI -->
         <div
             class="mx-auto mt-6 max-w-sm rounded-lg border border-orange-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
@@ -499,7 +467,7 @@ async function calcEquals() {
 
             <!-- Display -->
             <div
-                class="mb-4 rounded bg-slate-900/70 p-4 text-right font-mono text-2xl text-green-400"
+                class="mb-4 truncate rounded bg-slate-900/70 p-4 text-right font-mono text-2xl text-green-400"
             >
                 {{ calcDisplay }}
             </div>
@@ -631,8 +599,68 @@ async function calcEquals() {
                 banking apps. The complexity of the "calculation" on the server
                 can range from simple math to machine learning models, database
                 queries, or complex business logic. The client never needs to
-                know the details—it just sends a request and receives a
-                response!
+                know the details. It just needs to build and send the request
+                and receive and parse the response.
+            </p>
+            <br />
+            <p>
+                This makes maintaining code much easier, as your complex server
+                code never has to care about the client, and vice-versa.
+            </p>
+        </Callout>
+        <Heading title="What are some benefits to this approach?" />
+        <p>
+            1. It allows us to easily upgrade the client, meaning if we want to
+            change how the UI looks, we don't need to re-write ANY of the
+            'server' code, we only need to change the UI code.
+        </p>
+        <p>
+            2. It allows us to easily support a different client entirely. We
+            could create a new client that's a CLI tool, a website, a REST API,
+            whatever we want! As long as the client can send a "request", or
+            talk to, the server, we can use <em>any</em> client without having
+            to change our server.
+        </p>
+        <p>
+            3. Separation of concerns. This is a 'programming rule' that you
+            might have heard thrown around. While it's not gospel and we don't
+            always need to adhere to it, it is good advice. Essentially, keep
+            related code grouped together, and unrelated code separate. In our
+            case, the UI code and the math code should be kept apart. This
+            allows us to organize our project better so it's easier to find and
+            debug things.
+        </p>
+        <Heading title="Wrapping Things Up" />
+        <p>Let's recap what we've learned about client-server architecture:</p>
+        <ul class="list-disc space-y-2 pl-6">
+            <li>
+                <strong>Architecture</strong> refers to how we design and
+                structure a system.
+            </li>
+            <li>
+                <strong>Clients</strong> are the interfaces we interact with
+                that request data or processing from somewhere else.
+            </li>
+            <li>
+                <strong>Servers</strong> are computers that receive requests,
+                process them, and send back responses.
+            </li>
+            <li>
+                This pattern is everywhere: websites, apps, CLI tools, and even
+                desktop applications.
+            </li>
+        </ul>
+        <p>
+            The beauty of client-server architecture is its simplicity and
+            flexibility. By separating what the user sees (the client) from
+            where the work happens (the server), we can build more maintainable,
+            reusable, and scalable applications.
+        </p>
+        <Callout type="tip" title="Remember">
+            <p>
+                The client-server model isn't just for web development. Any time
+                you have a separation between an interface and the logic that
+                powers it, you're using this pattern!
             </p>
         </Callout>
     </Post>
