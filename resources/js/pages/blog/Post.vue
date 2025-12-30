@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Heading from '@/components/Heading.vue';
+import { toSlug } from '@/lib/utils';
 import { Head, Link } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -93,13 +94,13 @@ const props = defineProps<{
                             <a
                                 v-for="title in props.outline"
                                 :key="title"
-                                :href="`#${title}`"
+                                :href="`#${toSlug(title)}`"
                                 class="block font-mono text-sm transition-colors duration-200 hover:text-orange-300"
                             >
                                 {{ title }}
                             </a>
                             <a
-                                href="#About-Me"
+                                href="#about-me"
                                 class="block font-mono text-sm transition-colors duration-200 hover:text-orange-300"
                                 >About Me</a
                             >
