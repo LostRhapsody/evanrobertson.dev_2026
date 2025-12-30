@@ -5,6 +5,8 @@
     Supports lazy loading and prevents content shifting with explicit dimensions.
 -->
 <script setup lang="ts">
+import { ref } from 'vue';
+
 interface Props {
     src: string;
     alt: string;
@@ -28,15 +30,19 @@ const alignmentClasses = {
     center: 'mx-auto',
     right: 'ml-auto',
 };
+
+const showTooltip = ref(false);
 </script>
 
 <template>
     <div
         :class="[
-            'm-4 rounded-lg border border-orange-500/40 bg-slate-800/80 p-1 shadow-lg backdrop-blur-sm',
+            'relative m-4 rounded-lg border border-orange-500/40 bg-slate-800/80 p-1 shadow-lg backdrop-blur-sm',
             alignmentClasses[align],
         ]"
         :style="{ width, height }"
+        @mouseover="showTooltip = true"
+        @mouseleave="showTooltip = false"
     >
         <img
             :src="src"
@@ -46,6 +52,12 @@ const alignmentClasses = {
             loading="lazy"
             class="h-auto max-w-full rounded-md"
         />
+        <div
+            v-if="showTooltip"
+            class="absolute bottom-full left-1/2 z-10 -translate-x-1/2 transform rounded bg-slate-900 px-2 py-1 text-sm whitespace-nowrap text-white"
+        >
+            {{ alt }}
+        </div>
     </div>
 </template>
 

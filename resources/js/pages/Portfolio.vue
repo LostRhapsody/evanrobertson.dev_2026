@@ -86,8 +86,8 @@ const platforms = [
                     </h1>
                     <p class="font-mono text-orange-200/80">
                         <Link href="/blog">Blog</Link> •
-                        <Link href="#Experience">Experience</Link> •
-                        <Link href="#Contact">Contact</Link>
+                        <Link href="#projects-ive-worked-on">Experience</Link> •
+                        <Link href="#contact">Contact</Link>
                     </p>
                 </div>
             </div>
