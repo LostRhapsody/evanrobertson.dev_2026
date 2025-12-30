@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import Callout from '@/components/Callout.vue';
 import Heading from '@/components/Heading.vue';
+import SimpleManSummary from '@/components/SimpleManSummary.vue';
 import { ref } from 'vue';
 import Post from './Post.vue';
 import blogPosts from './post-list';
 
 const tableOfContents = [
+    "What is a Simple Man's Summary?",
     'What is OAuth?',
     'Why Use OAuth?',
     'OAuth Flow Overview',
@@ -135,6 +137,7 @@ async function fetchUserProfile() {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function refreshAccessToken() {
     if (!tokens.value?.refresh_token) return;
 
@@ -172,6 +175,7 @@ function logout() {
 }
 
 // Simulate receiving auth code from redirect
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function simulateAuthCode(code: string) {
     authCode.value = code;
     exchangeCodeForTokens(code);
@@ -192,18 +196,48 @@ function simulateAuthCode(code: string) {
     >
         <!-- Introduction Section -->
         <p>
-            <!-- Introduction paragraph about OAuth -->
+            The amount of people on "tech-twitter" saying either "rolling your
+            own auth is the only way to go" or "maintaing your own OAuth
+            implementation is too risky, use a provider!" is mind-boggling.
+        </p>
+        <p>
+            Not only does it make choosing the right path for you difficult, it
+            introduces more complexity and questions, like what the heck is
+            "OAuth"? What does "rolling your own auth" mean? And what benefits
+            do "auth providers" offer?
+        </p>
+        <p>
+            Authorization is always a tricky subject, so let's discuss it in
+            simple terms.
         </p>
 
-        <p>
-            <!-- More introductory content -->
-        </p>
+        <SimpleManSummary />
 
         <Heading title="What is OAuth?" />
         <p>
-            <!-- Explanation of OAuth -->
+            We'll start with the elephant in the room, because I imagine
+            everyone knows what "authorization" means. User wants to log into
+            your app, so you make them a login using a username and password.
+            When they log in, you check the user name and password, and if it
+            matches, you "log them in", whatever that means for your app.
         </p>
+        <p>Where does "OAuth" fall in the realm of "authorization"?</p>
 
+        <Callout type="info" title="OAuth2.0 Definition and Pronunciation">
+            <p>Pronounced "Oh-auth-two".</p>
+            <p>
+                OAuth2.0, or just OAuth for short, stands for "Open
+                Authorization" and is a standard design pattern created to allow
+                websites or applications to access resources hosted by other web
+                apps on behalf of a user.
+                <a
+                    href="https://auth0.com/intro-to-iam/what-is-oauth-2"
+                    target="_blank"
+                    class="text-blue-400 underline hover:text-blue-300"
+                    >Learn more</a
+                >
+            </p>
+        </Callout>
         <Heading title="Why Use OAuth?" />
         <p>
             <!-- Benefits and use cases -->
@@ -317,7 +351,7 @@ function simulateAuthCode(code: string) {
             class="mb-6 rounded-lg border border-blue-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
         >
             <h3 class="mb-4 text-lg font-semibold text-blue-400">
-                Authentication Status
+                Authorization Status
             </h3>
 
             <div v-if="isLoading" class="text-center text-slate-300">
