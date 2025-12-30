@@ -29,3 +29,29 @@ And this command to run the dev server:
 ```bash
 composer dev
 ```
+
+## Linting & Formatting
+
+This project uses ESLint and Prettier for JavaScript/TypeScript/Vue code formatting, and Laravel Pint for PHP code formatting.
+
+```bash
+# Lint and fix JavaScript/TypeScript/Vue files
+npm run lint
+
+# Format code with Prettier
+npm run format
+
+# Check formatting without fixing
+npm run format:check
+
+# PHP code formatting and linting
+vendor/bin/pint
+
+# Check PHP formatting without fixing
+vendor/bin/pint --test
+
+# Run only on changed files
+vendor/bin/pint --dirty
+```
+
+Run these commands before committing to ensure code quality.
