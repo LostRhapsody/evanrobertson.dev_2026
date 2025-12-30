@@ -178,7 +178,7 @@ async function calcEquals() {
         <a target="_" href="https://grugbrain.dev/">
             <Image
                 src="https://grugbrain.dev/grug.png"
-                alt="The grug brained developer meme/logo/image"
+                alt="The grug brained developer meme/logo/image. I recommend giving them a visit later!"
                 align="center"
                 width="300px"
             />
