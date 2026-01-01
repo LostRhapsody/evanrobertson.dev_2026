@@ -6,7 +6,7 @@ import { Head, Link } from '@inertiajs/vue3';
 const props = defineProps<{
     title: string;
     date: string;
-    outline?: Array<string>;
+    outline?: Array<{ title: string; level: number }>;
 }>();
 </script>
 
@@ -92,12 +92,19 @@ const props = defineProps<{
                         <Heading title="Table of Contents" />
                         <nav class="space-y-2">
                             <a
-                                v-for="title in props.outline"
-                                :key="title"
-                                :href="`#${toSlug(title)}`"
-                                class="block font-mono text-sm transition-colors duration-200 hover:text-orange-300"
+                                v-for="item in props.outline"
+                                :key="item.title"
+                                :href="`#${toSlug(item.title)}`"
+                                :class="[
+                                    'block font-mono text-sm transition-colors duration-200 hover:text-orange-300',
+                                    item.level === 2
+                                        ? 'ml-4'
+                                        : item.level === 3
+                                          ? 'ml-8'
+                                          : '',
+                                ]"
                             >
-                                {{ title }}
+                                {{ item.title }}
                             </a>
                             <a
                                 href="#about-me"

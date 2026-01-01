@@ -1,11 +1,11 @@
 <template>
     <Heading title="What is a Simple Man's Summary?" />
     <p>
-        "A Simple Man's Summary" is my version of "A dummy's guide to", and they
+        "A Simple Man's Summary" is my version of "A Dummy's Guide to", and they
         are often summaries I write for myself. When someone approaches me with
         a complex topic I don't understand, I sit down with them and draft A
-        Simple Man's Summary.
-        <strong>Because I am, quite honestly, a simple man,</strong> and complex
+        Simple Man's Summary,
+        <strong>because quite honestly, I am a simple man,</strong> and complex
         things don't sit well with me.
     </p>
     <a target="_" href="https://grugbrain.dev/">
