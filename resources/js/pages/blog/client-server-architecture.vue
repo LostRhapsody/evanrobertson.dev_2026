@@ -9,10 +9,10 @@ import blogPosts from './post-list';
 
 const tableOfContents = [
     { title: "What is a Simple Man's Summary?", level: 1 },
-    { title: 'So What is Client-Server Architecture?', level: 1 },
+    { title: 'What is Client-Server Architecture?', level: 1 },
     { title: 'Architecture', level: 2 },
-    { title: 'Clients', level: 3 },
-    { title: 'Servers', level: 3 },
+    { title: 'Clients', level: 2 },
+    { title: 'Servers', level: 2 },
     { title: 'Interactivity: Talk to the server!', level: 1 },
     { title: 'YouTube Example', level: 1 },
     { title: 'More Practical Programming Examples', level: 1 },
