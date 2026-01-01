@@ -7,22 +7,22 @@ import Post from './Post.vue';
 import blogPosts from './post-list';
 
 const tableOfContents = [
-    "What is a Simple Man's Summary?",
-    'What is OAuth?',
-    'Why Use OAuth?',
-    'OAuth Flow Overview',
-    'Setting Up OAuth',
-    'Client Registration',
-    'Authorization Code Flow',
-    'Token Exchange',
-    'Handling User Data',
-    'Security Considerations',
-    'Common Pitfalls',
-    'Implementation Example',
-    'Testing OAuth Integration',
-    'Troubleshooting',
-    'Best Practices',
-    'Wrapping Up',
+    { title: "What is a Simple Man's Summary?", level: 1 },
+    { title: 'What is OAuth?', level: 1 },
+    { title: 'Why Use OAuth?', level: 1 },
+    { title: 'OAuth Flow Overview', level: 1 },
+    { title: 'Setting Up OAuth', level: 1 },
+    { title: 'Client Registration', level: 2 },
+    { title: 'Authorization Code Flow', level: 2 },
+    { title: 'Token Exchange', level: 2 },
+    { title: 'Handling User Data', level: 2 },
+    { title: 'Security Considerations', level: 1 },
+    { title: 'Common Pitfalls', level: 1 },
+    { title: 'Implementation Example', level: 1 },
+    { title: 'Testing OAuth Integration', level: 1 },
+    { title: 'Troubleshooting', level: 1 },
+    { title: 'Best Practices', level: 1 },
+    { title: 'Wrapping Up', level: 1 },
 ];
 
 interface OAuthUser {
