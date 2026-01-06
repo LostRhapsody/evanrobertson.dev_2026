@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import Callout from '@/components/Callout.vue';
 import Heading from '@/components/Heading.vue';
-import Image from '@/components/Image.vue';
+import SimpleManSummary from '@/components/SimpleManSummary.vue';
+import SubHeading from '@/components/SubHeading.vue';
 import { ref } from 'vue';
 import Post from './Post.vue';
 import blogPosts from './post-list';
 
 const tableOfContents = [
-    "What is a Simple Man's Summary?",
-    'So What is Client-Server Architecture?',
-    'Architecture',
-    'Clients',
-    'Servers',
-    'Interactivity: Talk to the server!',
-    'YouTube Example',
-    'More Practical Programming Examples',
-    'Calculator Example: Putting It All Together',
-    'What are some benefits to this approach?',
-    'Wrapping Things Up',
-    'Calculator Example: Putting It All Together',
+    { title: "What is a Simple Man's Summary?", level: 1 },
+    { title: 'What is Client-Server Architecture?', level: 1 },
+    { title: 'Architecture', level: 2 },
+    { title: 'Clients', level: 2 },
+    { title: 'Servers', level: 2 },
+    { title: 'Interactivity: Talk to the server!', level: 1 },
+    { title: 'YouTube Example', level: 1 },
+    { title: 'More Practical Programming Examples', level: 1 },
+    { title: 'Calculator Example: Putting It All Together', level: 1 },
+    { title: 'What are some benefits to this approach?', level: 1 },
+    { title: 'Wrapping Things Up', level: 1 },
 ];
 
 interface ServerTimeResponse {
@@ -148,9 +148,10 @@ async function calcEquals() {
         <p>
             The amount of technical jargon we are bombarded with daily is
             overwhelming, especially when you're first starting out. When I was
-            a student in College learning about programming and networking, lots
-            of simple concepts went over my head, just due to how convuluted it
-            sounded, while in practice being not that complex at all!
+            a student in college learning about programming and networking lots
+            of simple concepts went over my head. This was all due to how
+            convuluted it sounded, while in practice being not that complex at
+            all!
         </p>
         <p>
             One of those concepts was client-server architecutre. What does it
@@ -158,53 +159,42 @@ async function calcEquals() {
         </p>
         <p>
             If you're coming from a technical background, you probably have the
-            correct assumption a browser is the client and whatever computer
-            that hosts the website is a server. That would be correct! But it
-            applies to more than just websites.
+            correct assumption that a browser is the client and whatever
+            computer that hosts the website is a server. That would be correct!
+            However, it applies to more than just websites.
         </p>
         <p>
             If you're just starting your journey, and you didn't know a browser
             acts as a client, or what 'hosting' a website even means, that's
             okay! We'll talk about all that and more.
         </p>
-        <Heading title="What is a Simple Man's Summary?" />
+        <SimpleManSummary />
+        <Heading title="TODO!!!!!" />
         <p>
-            "A Simple Man's Summary" is my version of "A dummy's guide to", and
-            they are often summaries I write for myself. When someone approaches
-            me with a complex topic I don't understand, I sit down with them and
-            draft A Simple Man's Summary.
-            <strong>Because I am, quite honestly, a simple man,</strong> and
-            complex things don't sit well with me.
+            Remove the use of "" double or '' single quotes for emphasis, use
+            italics or code formatting, sparingly, to highlight important terms.
         </p>
-        <a target="_" href="https://grugbrain.dev/">
-            <Image
-                src="https://grugbrain.dev/grug.png"
-                alt="The grug brained developer meme/logo/image. I recommend giving them a visit later!"
-                align="center"
-                width="300px"
-            />
-        </a>
-        <Heading title="So What is Client-Server Architecture?" />
+        <Heading title="What is Client-Server Architecture?" />
         <p>Let's start with some definitions!</p>
-        <Heading title="Architecture" />
+        <SubHeading title="Architecture" />
         <p>
             When we talk about architecture, we aren't talking about buildings!
             In this context, architecture simply refers to how we are designing
-            a system. Imagine your favorite website, like YouTube.
+            a system. Imagine your favorite website such as YouTube.
         </p>
         <p>
-            When you visit YouTube in your browser, you see lots of content that
-            lives in your browser, buttons, thumbnails, and the video player,
-            for example. But we know the videos themselves don't live in our
-            browser; they come from YouTube, somehow!
+            When you visit YouTube you see lots of content that lives in your
+            browser: buttons, thumbnails, and the video player, for example. We
+            know the videos themselves don't live in our browser; they come from
+            YouTube, somehow!
         </p>
         <p>
             In this example, YouTube is our system. When Google is discussing
             how to design YouTube, they would refer to it's architecture pattern
-            as a 'client-server' architecture pattern, where Google acts as the
+            as a 'client-server' architecture pattern; where Google acts as the
             server and your browser acts as the client.
         </p>
-        <Heading title="Clients" />
+        <SubHeading title="Clients" />
         <p>
             A client is not <em>just a web browser</em> though! A client can be
             many things.
@@ -212,10 +202,10 @@ async function calcEquals() {
         <p>
             I like to define a client like so: If it is something that I
             interact with that requests information, data, or processes things
-            somewhere else, it's a client.
+            elsewhere, it's a client.
         </p>
         <p>
-            A good example is a web browser, because none of the content we see
+            A good example is a web browser. None of the website content we see
             inside of a browser is from the browser itself. The browser's job is
             to ask for content from a server, like YouTube. YouTube then
             responds with data, and the browser displays it for you.
@@ -224,11 +214,11 @@ async function calcEquals() {
         <p>
             A CLI (Command-Line Interface) tool that you use inside of a
             terminal can act as a client as well. Often, these programs are
-            split into two distinct portions. One half will handle the display
-            of information for you, and the other half "does the work", whatever
-            that tool is supposed to do. A video converter might have a 'client'
-            package that displays information and a 'server' package that
-            performs the conversion.
+            split into two distinct portions. One half handles display of
+            information, and the other half <em>does the work</em>. A video
+            converter might have a <em>client</em> package that displays
+            information, and a <em>server</em> package that performs the
+            conversion.
         </p>
         <p>
             Many CLI tools and other applications use this model, so the code in
@@ -285,7 +275,7 @@ async function calcEquals() {
                 </li>
             </ul>
         </Callout>
-        <Heading title="Servers" />
+        <SubHeading title="Servers" />
         <p>
             A server is (more or less) another word for a computer. Any
             computer, including the phone or desktop you're reading this on, can
@@ -299,13 +289,13 @@ async function calcEquals() {
         </p>
         <p>
             A silly example is to think of a server in a restaurant. A server
-            literally serves you food. In a similar sense, a computer server
-            literally serves you data.
+            <em>literally</em> serves you food. In a similar sense, a computer
+            server <em>literally</em> serves you data.
         </p>
         <p>
             In the client-server architecture pattern, it's the server's job to
-            receive input from a client, perform an action of some sort, such as
-            converting data from one format into another, and then respond with
+            receive input from a client. It then performs an action, such as
+            converting data from one format into another, and then responds with
             data that the client can use.
         </p>
         <Callout type="info" title="What is a server?">
@@ -392,14 +382,14 @@ async function calcEquals() {
         <p>
             Our browser is a client. When we click a video, our browser sends a
             request to YouTube asking for the video to play. YouTube is the
-            server, and it processes your request, finds the right video, and
-            sends it back to your browser, the client, to be played.
+            server, it processes your request, finds the right video, and sends
+            it back to your browser, the client, to be played.
         </p>
         <Heading title="More Practical Programming Examples" />
         <p>
-            This pattern is very convenient because it matches our "HTTP Request
-            Lifecycle" model very well, where a client will send an HTTP request
-            to a server and receive an HTTP response.
+            This pattern is very convenient because it matches our
+            <em>HTTP Request Lifecycle</em> model very well. A client will send
+            an HTTP request to a server and receive an HTTP response.
         </p>
         <p>
             It's not just applicable to web sites and apps though! As mentioned
@@ -412,14 +402,14 @@ async function calcEquals() {
             expression into and the result is shown to us.
         </p>
         <p>
-            In the code itself though, it may be structured like a client and
-            server instead though, where the client is the GUI that accepts user
-            input, and the server is the actual calculator logic that performs
-            the math and returns results.
+            In the code itself, it may be structured like a client and server
+            instead, where the client is the GUI that accepts user input, and
+            the server is the actual calculator logic that performs the math and
+            returns results.
         </p>
         <Heading title="Calculator Example: Putting It All Together" />
         <p>
-            The best way to learn is to see a practical, hands-on example. Below
+            The best way to learn is to see a practical hands-on example. Below
             is a simple calculator that demonstrates the client-server
             architecture in action.
         </p>
@@ -447,8 +437,8 @@ async function calcEquals() {
         <Callout type="tip" title="Why do it this way?">
             <p>
                 For a simple calculator, doing the math on the server might seem
-                like overkill. But this demonstrates the pattern very well. In a
-                real application, the "server" might be performing complex
+                like overkill, however, this demonstrates the pattern very well.
+                In a real application, the "server" might be performing complex
                 calculations, accessing a database, or processing data that
                 can't be done on the client.
             </p>
@@ -617,9 +607,9 @@ async function calcEquals() {
         <p>
             2. It allows us to easily support a different client entirely. We
             could create a new client that's a CLI tool, a website, a REST API,
-            whatever we want! As long as the client can send a "request", or
-            talk to, the server, we can use <em>any</em> client without having
-            to change our server.
+            whatever we want! As long as the client can send a <em>request</em>,
+            or talk to the server, we can use <strong>any</strong> client
+            without having to change our server.
         </p>
         <p>
             3. Separation of concerns. This is a 'programming rule' that you
@@ -627,7 +617,7 @@ async function calcEquals() {
             always need to adhere to it, it is good advice. Essentially, keep
             related code grouped together, and unrelated code separate. In our
             case, the UI code and the math code should be kept apart. This
-            allows us to organize our project better so it's easier to find and
+            allows us to organize our project better, so it's easier to find and
             debug things.
         </p>
         <Heading title="Wrapping Things Up" />
