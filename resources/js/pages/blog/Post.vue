@@ -6,7 +6,7 @@ import { Head, Link } from '@inertiajs/vue3';
 const props = defineProps<{
     title: string;
     date: string;
-    outline?: Array<string>;
+    outline?: Array<{ title: string; level: number }>;
 }>();
 </script>
 
@@ -45,8 +45,40 @@ const props = defineProps<{
         </header>
 
         <!-- Main Content -->
-        <main class="mx-auto max-w-6xl p-4">
+        <main class="mx-auto max-w-7xl p-4">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+                <!-- Sidebar (Mobile) -->
+                <aside class="md:col-span-1 lg:hidden">
+                    <!-- Table of Contents -->
+                    <div
+                        class="sticky top-4 rounded-lg border border-orange-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
+                    >
+                        <Heading title="Table of Contents" />
+                        <nav class="space-y-2">
+                            <a
+                                v-for="item in props.outline"
+                                :key="item.title"
+                                :href="`#${toSlug(item.title)}`"
+                                :class="[
+                                    'block font-mono text-sm transition-colors duration-200 hover:text-orange-300',
+                                    item.level === 2
+                                        ? 'ml-4'
+                                        : item.level === 3
+                                          ? 'ml-8'
+                                          : '',
+                                ]"
+                            >
+                                {{ item.title }}
+                            </a>
+                            <a
+                                href="#about-me"
+                                class="block font-mono text-sm transition-colors duration-200 hover:text-orange-300"
+                                >About Me</a
+                            >
+                        </nav>
+                    </div>
+                </aside>
+
                 <!-- Article Content -->
                 <article class="lg:col-span-3">
                     <div
@@ -83,8 +115,8 @@ const props = defineProps<{
                     </div>
                 </article>
 
-                <!-- Sidebar -->
-                <aside class="lg:col-span-1">
+                <!-- Sidebar (Desktop) -->
+                <aside class="md:hidden lg:col-span-1 lg:block">
                     <!-- Table of Contents -->
                     <div
                         class="sticky top-4 rounded-lg border border-orange-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
@@ -92,12 +124,19 @@ const props = defineProps<{
                         <Heading title="Table of Contents" />
                         <nav class="space-y-2">
                             <a
-                                v-for="title in props.outline"
-                                :key="title"
-                                :href="`#${toSlug(title)}`"
-                                class="block font-mono text-sm transition-colors duration-200 hover:text-orange-300"
+                                v-for="item in props.outline"
+                                :key="item.title"
+                                :href="`#${toSlug(item.title)}`"
+                                :class="[
+                                    'block font-mono text-sm transition-colors duration-200 hover:text-orange-300',
+                                    item.level === 2
+                                        ? 'ml-4'
+                                        : item.level === 3
+                                          ? 'ml-8'
+                                          : '',
+                                ]"
                             >
-                                {{ title }}
+                                {{ item.title }}
                             </a>
                             <a
                                 href="#about-me"
