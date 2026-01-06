@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Heading from '@/components/Heading.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import SiteFooter from '@/components/SiteFooter.vue';
+import SiteHeader from '@/components/SiteHeader.vue';
+import { Head } from '@inertiajs/vue3';
 
 const focusAreas = [
     {
@@ -74,24 +76,7 @@ const platforms = [
         class="min-h-screen bg-linear-to-br from-slate-950 via-amber-950/20 to-slate-950"
     >
         <!-- Header -->
-        <header
-            class="border-b border-orange-500/40 bg-slate-900/90 backdrop-blur-sm"
-        >
-            <div class="mx-auto max-w-6xl px-4 py-6">
-                <div class="text-center">
-                    <h1
-                        class="mb-2 font-mono text-3xl font-bold text-orange-400"
-                    >
-                        Evan Robertson
-                    </h1>
-                    <p class="font-mono text-orange-200/80">
-                        <Link href="/blog">Blog</Link> •
-                        <Link href="#projects-ive-worked-on">Experience</Link> •
-                        <Link href="#contact">Contact</Link>
-                    </p>
-                </div>
-            </div>
-        </header>
+        <SiteHeader />
 
         <!-- Main Content -->
         <main class="mx-auto max-w-6xl p-4">
@@ -150,6 +135,31 @@ const platforms = [
                             <p class="font-mono text-sm text-orange-100/80">
                                 {{ area.description }}
                             </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools I've built section -->
+                <div
+                    class="rounded-lg border border-orange-500/40 bg-slate-800/80 p-4 backdrop-blur-sm lg:col-span-2"
+                >
+                    <Heading title="Tools I've Built" />
+                    <div class="space-y-3 font-mono text-orange-100">
+                        <p class="mb-4 text-orange-200/60">
+                            Sometimes, there is a gap in my workflow where there
+                            isn't a tool perfect for me. In those cases, I try
+                            and build my own. When these tools become polished
+                            enough to share, I share them here.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <a
+                                    href="/tools"
+                                    class="text-orange-400 underline-offset-2 transition-colors duration-200 hover:text-amber-400 hover:underline"
+                                >
+                                    View my tools
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -263,6 +273,9 @@ const platforms = [
                 </div>
             </div>
         </main>
+
+        <!-- Footer -->
+        <SiteFooter />
     </div>
 </template>
 

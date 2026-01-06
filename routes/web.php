@@ -14,3 +14,11 @@ Route::get('/blog', function () {
 Route::get('/blog/{slug}', function ($slug) {
     return Inertia::render("blog/{$slug}");
 })->name('blog.post');
+
+Route::get('/tools', function () {
+    return Inertia::render('Tools');
+})->name('tools');
+
+Route::get('/tools/{slug}', function ($slug) {
+    return Inertia::render("tools/{$slug}");
+})->name('tools.tool');
