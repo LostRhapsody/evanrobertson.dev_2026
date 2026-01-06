@@ -2,11 +2,19 @@
 import SiteFooter from '@/components/SiteFooter.vue';
 import SiteHeader from '@/components/SiteHeader.vue';
 import { Head, Link } from '@inertiajs/vue3';
-import blogPosts from './blog/post-list';
+
+const tools = [
+    {
+        title: 'Megatile',
+        excerpt:
+            'An opinionated tiling window manager for Windows, written in Rust.',
+        slug: 'megatile',
+    },
+];
 </script>
 
 <template>
-    <Head title="Blog - Evan Robertson" />
+    <Head title="Tools - Evan Robertson" />
 
     <div
         class="flex min-h-screen flex-col bg-linear-to-br from-slate-950 via-amber-950/20 to-slate-950"
@@ -22,27 +30,24 @@ import blogPosts from './blog/post-list';
                     class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2"
                 >
                     <div
-                        v-for="post in blogPosts"
-                        :key="post.slug"
+                        v-for="tool in tools"
+                        :key="tool.slug"
                         class="hover-panel rounded-lg border border-orange-500/40 bg-slate-800/80 p-6 backdrop-blur-sm"
                     >
                         <div class="mb-4">
                             <h3
                                 class="mb-2 font-mono text-lg font-bold text-orange-400"
                             >
-                                {{ post.title }}
+                                {{ tool.title }}
                             </h3>
-                            <p class="font-mono text-sm text-amber-400">
-                                {{ post.date }}
-                            </p>
                         </div>
                         <p
                             class="mb-4 font-mono text-sm leading-relaxed text-orange-100/80"
                         >
-                            {{ post.excerpt }}
+                            {{ tool.excerpt }}
                         </p>
                         <Link
-                            :href="`/blog/${post.slug}`"
+                            :href="`/tools/${tool.slug}`"
                             class="inline-flex items-center font-mono text-sm text-orange-400 underline-offset-2 transition-colors duration-200 hover:text-amber-400 hover:underline"
                         >
                             Read More →
